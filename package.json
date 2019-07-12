@@ -2,9 +2,9 @@
   "name": "discordbot",
   "version": "1.0.0",
   "description": "",
-  "main": "bot.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
