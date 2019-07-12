@@ -15,10 +15,9 @@ class FindImage extends commando.Command {
     async run(message, unit) {
         var link = "https://aigis.fandom.com/wiki/" + unit;
 
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
         const page = await browser.newPage();
         await page.goto(link);
-        // const textContent = await page.evaluate(() => document.querySelector('.lzyPlcHld.lzyTrns.lzyLoaded').getAttribute('src'));
         
         const textContent = await page.evaluate(() => {
             if ( $( '.lzyPlcHld.lzyTrns.lzyLoaded' ).length ) {
