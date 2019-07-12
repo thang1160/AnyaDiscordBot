@@ -12,12 +12,16 @@ class FindImage extends commando.Command {
         });
     }
 
-    async run(message, unit) {
+    async run(message, input) {
+        var unit = toTitleCase(input);
+        console.log(unit);
         var link = "https://aigis.fandom.com/wiki/" + unit;
+        
 
-        const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+        const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.goto(link);
+        // const textContent = await page.evaluate(() => document.querySelector('.lzyPlcHld.lzyTrns.lzyLoaded').getAttribute('src'));
         
         const textContent = await page.evaluate(() => {
             if ( $( '.lzyPlcHld.lzyTrns.lzyLoaded' ).length ) {
@@ -29,6 +33,12 @@ class FindImage extends commando.Command {
         message.channel.send(textContent);
         await browser.close();
     }
+}
+// capitalize
+function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
 }
 
 module.exports = FindImage;
