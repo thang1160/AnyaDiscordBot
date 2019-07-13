@@ -20,12 +20,13 @@ class CompareClass extends commando.Command {
         await page.goto(link);
         
         const textContent = await page.evaluate(() => {
-            if ( $( '.gcstyle.bgwhite.hsbullet tr' ).length == 5) {
-                var temp = $('.gcstyle.bgwhite.hsbullet tr')[3];
+            if ( $( '.gcstyle.bgwhite.hsbullet tr' ).length >= 5) {
+                var length = $( '.gcstyle.bgwhite.hsbullet tr' ).length;
+                var temp = $('.gcstyle.bgwhite.hsbullet tr')[length-2];
                 var name1 = temp.getElementsByTagName("td")[0].textContent;
                 var des1 = temp.getElementsByTagName("td")[1].textContent;
 
-                temp = $('.gcstyle.bgwhite.hsbullet tr')[4];
+                temp = $('.gcstyle.bgwhite.hsbullet tr')[length-1];
                 var name2 = temp.getElementsByTagName("td")[0].textContent;
                 var des2 = temp.getElementsByTagName("td")[1].textContent;
 
