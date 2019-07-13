@@ -4,10 +4,10 @@ const puppeteer = require('puppeteer');
 class FindImage extends commando.Command {
     constructor(client) {
         super(client, {
-            name: 'image',
+            name: 'compare',
             group: 'find',
-            memberName: 'image',
-            description: 'find an image of unit'
+            memberName: 'compare',
+            description: 'compare AW2ver1 and AW2ver2 of an unit'
         });
     }
 
