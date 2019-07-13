@@ -32,7 +32,7 @@ class CompareClass extends commando.Command {
 
                 return name1 + "\n" + des1 + "\n" + name2 + "\n" + des2;
             }
-            else return "unit don't have AW2 or only have 1 path";
+            else return unit + " don't have AW2 or only have 1 path";
         });
 
         message.channel.send(textContent);
