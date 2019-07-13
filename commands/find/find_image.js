@@ -24,10 +24,10 @@ class FindImage extends commando.Command {
             if ( $( '.lzyPlcHld.lzyTrns.lzyLoaded' ).length ) {
                 return document.querySelector('.lzyPlcHld.lzyTrns.lzyLoaded').getAttribute('src')
             }
-            else return unit + "not found";
+            else return " not found";
         });
 
-        message.channel.send(textContent);
+        message.channel.send(unit + textContent);
         await browser.close();
     }
 }
