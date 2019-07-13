@@ -45,4 +45,4 @@ function toTitleCase(str) {
     });
 }
 
-module.exports = FindImage;
+module.exports = CompareClass;
