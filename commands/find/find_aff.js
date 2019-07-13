@@ -20,11 +20,15 @@ class FindAff extends commando.Command {
         await page.goto(link);
         
         const textContent = await page.evaluate(() => {
-            if ( $( '.listtable.bgwhite' ).length ) {
+            if ($('.listtable.bgwhite tr').length == 9){
                 var temp = $('.listtable.bgwhite tr')[2].getElementsByTagName("td")[11].innerText;
                 return temp;
             }
-            else return " not found";
+            else if ($('.listtable.bgwhite tr').length == 10){
+                var temp = $('.listtable.bgwhite tr')[4].getElementsByTagName("td")[11].innerText;
+                return temp;
+            }
+            else return "not found";
         });
 
         message.channel.send(unit + textContent);
