@@ -24,10 +24,10 @@ class FindAff extends commando.Command {
                 var temp = $('.listtable.bgwhite tr')[2].getElementsByTagName("td")[11].innerText;
                 return temp;
             }
-            else return "not found";
+            else return " not found";
         });
 
-        message.channel.send(textContent);
+        message.channel.send(unit + textContent);
         await browser.close();
     }
 }
