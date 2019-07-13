@@ -21,17 +21,15 @@ class FindAff extends commando.Command {
         
         const textContent = await page.evaluate(() => {
             if ($('.listtable.bgwhite tr').length == 9){
-                var temp = $('.listtable.bgwhite tr')[2].getElementsByTagName("td")[11].innerText;
-                return temp;
+                return $('.listtable.bgwhite tr')[2].getElementsByTagName("td")[11].innerText;
             }
             else if ($('.listtable.bgwhite tr').length == 10){
-                var temp = $('.listtable.bgwhite tr')[4].getElementsByTagName("td")[11].innerText;
-                return temp;
+                return $('.listtable.bgwhite tr')[4].getElementsByTagName("td")[9].innerText;
             }
             else return "not found";
         });
 
-        message.channel.send(unit + textContent);
+        message.channel.send(unit + " " + textContent);
         await browser.close();
     }
 }
