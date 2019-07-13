@@ -3,8 +3,6 @@ const puppeteer = require('puppeteer');
 
 
 class FindImage extends commando.Command {
-    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
-    const page = await browser.newPage();
     constructor(client) {
         super(client, {
             name: 'image',
@@ -18,6 +16,8 @@ class FindImage extends commando.Command {
         var unit = toTitleCase(input);
         var link = "https://aigis.fandom.com/wiki/" + unit;
         
+        const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+        const page = await browser.newPage();
         await page.goto(link);
         
         const textContent = await page.evaluate(() => {
