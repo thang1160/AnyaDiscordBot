@@ -24,7 +24,7 @@ class FindImage extends commando.Command {
             if ( $( '.lzyPlcHld.lzyTrns.lzyLoaded' ).length ) {
                 return document.querySelector('.lzyPlcHld.lzyTrns.lzyLoaded').getAttribute('src')
             }
-            else return "not found";
+            else return input + "not found";
         });
 
         message.channel.send(textContent);
