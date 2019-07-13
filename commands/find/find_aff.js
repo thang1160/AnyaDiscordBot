@@ -23,7 +23,7 @@ class FindAff extends commando.Command {
             if ($('.listtable.bgwhite tr').length == 9){
                 return $('.listtable.bgwhite tr')[2].getElementsByTagName("td")[11].innerText;
             }
-            else if ($('.listtable.bgwhite tr').length == 10){
+            else if ($('.listtable.bgwhite tr').length == 10 || $('.listtable.bgwhite tr').length == 12){
                 return $('.listtable.bgwhite tr')[4].getElementsByTagName("td")[9].innerText;
             }
             else return "not found";
