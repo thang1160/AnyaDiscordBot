@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
 const puppeteer = require('puppeteer');
 
-class FindImage extends commando.Command {
+class CompareClass extends commando.Command {
     constructor(client) {
         super(client, {
             name: 'compare',
