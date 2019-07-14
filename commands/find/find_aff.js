@@ -1,5 +1,7 @@
 const commando = require('discord.js-commando');
-const puppeteer = require('puppeteer');
+var request = require('request');
+var cheerio = require('cheerio');
+var name = require('../../lib.js').name;
 
 class FindAff extends commando.Command {
     constructor(client) {
@@ -7,35 +9,58 @@ class FindAff extends commando.Command {
             name: 'aff',
             group: 'find',
             memberName: 'aff',
-            description: 'find aff stats of an unit'
+            description: 'find aff stats of an unit \n example: !aff plat kanon'
         });
     }
 
     async run(message, input) {
         var unit = toTitleCase(input);
-        var link = "https://aigis.fandom.com/wiki/" + unit;
+        var gold = unit.startsWith("Gold");
+        var platinum = unit.startsWith("Plat ");
+        var black = unit.startsWith("Black");
+        var link;
+        if(gold == true)
+        {
+            link = "https://aigis.fandom.com/wiki/150_Affection_Bonus_-_Gold";
+            unit = unit.substring(5, unit.length);
+        }
+        if(platinum == true)
+        {
+            link = "https://aigis.fandom.com/wiki/150_Affection_Bonus_-_Platinum";
+            unit = unit.substring(5, unit.length);
+        }
+        if(black == true)
+        {
+            link = "https://aigis.fandom.com/wiki/150_Affection_Bonus_-_Black";
+            unit = unit.substring(6, unit.length);
+        }
+        if(name[unit]) unit = name[unit];
         
-        const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
-        const page = await browser.newPage();
-        await page.goto(link);
-        
-        const textContent = await page.evaluate(() => {
-            if ($('.listtable.bgwhite tr').length == 9){
-                return $('.listtable.bgwhite tr')[2].getElementsByTagName("td")[11].innerText;
-            }
-            else if ($('.listtable.bgwhite tr').length == 10 || $('.listtable.bgwhite tr').length == 12){
-                return $('.listtable.bgwhite tr')[4].getElementsByTagName("td")[9].innerText;
-            }
-            else return "not found";
-        });
-
-        message.channel.send(unit + " " + textContent);
-        await browser.close();
+        if(link)
+        {
+            request(link, function (err, resp, html) {
+                if (!err) {
+                        const $ = cheerio.load(html);
+                        var jquery = "tr:contains('" + unit + "')";
+                        var output = $(jquery).html();
+                        if(output)
+                        {
+                            output = output.replace(/<[^>]*>/g,"\n");
+                            output = output.replace(/\n+/g,"\n");
+                            message.channel.send(output);
+                        }
+                        else
+                            message.channel.send(input + " not found");
+                }
+            });
+        }
+        else
+            message.channel.send("you need to add rarity before unit's name");
     }
 }
 // capitalize
 function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function(txt){
+    return str.replace(/\w+('s)?/g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 }
