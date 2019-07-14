@@ -1,12 +1,7 @@
 const commando = require('discord.js-commando');
 var request = require('request');
 var cheerio = require('cheerio');
-var map= {
-    'Snekloli' : 'Orochihime',
-    'Shampoo' : 'Jin-Guang Sheng-Pu',
-    'Gelbro' : 'Gellius',
-    'Shoka' : 'Shokatsuryou'
-}
+var name = require('../../lib.js').name;
 
 class FindImage extends commando.Command {
     constructor(client) {
@@ -24,7 +19,7 @@ class FindImage extends commando.Command {
         if(AW == true)  unit = unit.substring(3,unit.length);
         var AW2 = unit.startsWith("Aw2");
         if(AW2 == true) unit = unit.substring(4,unit.length);
-        if(map[unit]) unit = map[unit];
+        if(name[unit]) unit = name[unit];
         var link = "https://aigis.fandom.com/wiki/" + unit;
 
         request(link, function (err, resp, html) {
