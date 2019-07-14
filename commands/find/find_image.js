@@ -28,6 +28,7 @@ class FindImage extends commando.Command {
                     var check = false;
                     if(AW == true)  {
                         output = ($('.InfoboxAW.ui-image a').attr('href'));
+                        message.channel.send(output);
                         check = true;
                     }
                     else if(AW2 == true){
