@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
-const puppeteer = require('puppeteer');
-
+var request = require('request');
+var cheerio = require('cheerio');
 
 class FindImage extends commando.Command {
     constructor(client) {
@@ -14,26 +14,35 @@ class FindImage extends commando.Command {
 
     async run(message, input) {
         var unit = toTitleCase(input);
+        var AW = unit.startsWith("Aw ");
+        if(AW == true)  unit = unit.substring(3,unit.length);
+        var AW2 = unit.startsWith("Aw2");
+        if(AW2 == true) unit = unit.substring(4,unit.length);
         var link = "https://aigis.fandom.com/wiki/" + unit;
-        
-        const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
-        const page = await browser.newPage();
-        await page.goto(link);
-        
-        const textContent = await page.evaluate(() => {
-            if ( $( '.lzyPlcHld.lzyTrns.lzyLoaded' ).length ) {
-                return document.querySelector('.lzyPlcHld.lzyTrns.lzyLoaded').getAttribute('src')
-            }
-            else return "not found";
-        });
 
-        message.channel.send(unit + " " + textContent);
-        await browser.close();
+        request(link, function (err, resp, html) {
+            if (!err) {
+                const $ = cheerio.load(html);
+                if ( $('.image.image-thumbnail').length ) {
+                    var output;
+                    if(AW == true)  output = ($('.InfoboxAW.ui-image a').attr('href'));
+                    else if(AW2 == true){
+                        output = ($('.InfoboxAW2v1.ui-image a').attr('href'));
+                        if(output)  console.log(output);
+                        output = ($('.InfoboxAW2v2.ui-image a').attr('href'));
+                    }
+                    else    output = ($('.InfoboxBase.ui-image a').attr('href'));
+                    if(output) message.channel.send(output);
+                    else message.channel.send(input + " does not exist");
+                }
+                else message.channel.send(unit + " " + "not found");
+            }
+        });
     }
 }
 // capitalize
 function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function(txt){
+    return str.replace(/\w+/g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 }
