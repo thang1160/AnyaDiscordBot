@@ -25,15 +25,34 @@ class FindImage extends commando.Command {
                 const $ = cheerio.load(html);
                 if ( $('.image.image-thumbnail').length ) {
                     var output;
-                    if(AW == true)  output = ($('.InfoboxAW.ui-image a').attr('href'));
-                    else if(AW2 == true){
-                        output = ($('.InfoboxAW2v1.ui-image a').attr('href'));
-                        if(output)  console.log(output);
-                        output = ($('.InfoboxAW2v2.ui-image a').attr('href'));
+                    var check = false;
+                    if(AW == true)  {
+                        output = ($('.InfoboxAW.ui-image a').attr('href'));
+                        check = true;
                     }
-                    else    output = ($('.InfoboxBase.ui-image a').attr('href'));
-                    if(output) message.channel.send(output);
-                    else message.channel.send(input + " does not exist");
+                    else if(AW2 == true){
+                        output = ($('.InfoboxAW2.ui-image a').attr('href'));
+                        if(output)  {
+                            message.channel.send(output);
+                            check = true;
+                        }
+                        output = ($('.InfoboxAW2v1.ui-image a').attr('href'));
+                        if(output)  {
+                            message.channel.send(output);
+                            check = true;
+                        }
+                        output = ($('.InfoboxAW2v2.ui-image a').attr('href'));
+                        if(output)  {
+                            message.channel.send(output);
+                            check = true;
+                        }
+                    }
+                    else{
+                        output = ($('.InfoboxBase.ui-image a').attr('href'));
+                        message.channel.send(output);
+                        check = true;
+                    }
+                    if(check == false) message.channel.send(input + " does not exist");
                 }
                 else message.channel.send(unit + " " + "not found");
             }
