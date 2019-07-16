@@ -1,7 +1,8 @@
 const commando = require('discord.js-commando');
 var request = require('request');
 var cheerio = require('cheerio');
-var name = require('../../lib.js').name;
+var name = require('../../library/lib.js').name;
+var functions = require('../../functions.js');
 
 class FindImage extends commando.Command {
     constructor(client) {
@@ -14,59 +15,33 @@ class FindImage extends commando.Command {
     }
 
     async run(message, input) {
-        var unit = toTitleCase(input);
-        var AW = unit.startsWith("Aw ");
-        if(AW == true)  unit = unit.substring(3,unit.length);
-        var AW2 = unit.startsWith("Aw2");
-        if(AW2 == true) unit = unit.substring(4,unit.length);
+        var temp = functions.toTitleCase(input);
+        var version = "";
+        if(temp.includes(" Aa"))
+        {
+            version = "_AA";
+        }
+        if(temp.includes(" Aw2v1")) version += "_AW2v1";
+        else if(temp.includes(" Aw2v2")) version += "_AW2v2";
+        else if(temp.includes(" Aw2")) version += "_AW2";
+        else if(temp.includes(" Aw")) version += "_AW";
+        var unit = functions.delAW(temp);
         if(name[unit]) unit = name[unit];
-        var link = "https://aigis.fandom.com/wiki/" + unit;
+        var link = "https://aigis.fandom.com/wiki/File:" + unit + version + "_Render.png";
 
         request(link, function (err, resp, html) {
             if (!err) {
                 const $ = cheerio.load(html);
-                if ( $('.image.image-thumbnail').length ) {
-                    var output;
-                    var check = false;
-                    if(AW == true)  {
-                        output = ($('.InfoboxAW.ui-image a').attr('href'));
+                if ( $('.fullImageLink') ) {
+                    var output = ($('.fullImageLink a').attr('href'));
+                    if(output)  {
                         message.channel.send(output);
-                        check = true;
                     }
-                    else if(AW2 == true){
-                        output = ($('.InfoboxAW2.ui-image a').attr('href'));
-                        if(output)  {
-                            message.channel.send(output);
-                            check = true;
-                        }
-                        output = ($('.InfoboxAW2v1.ui-image a').attr('href'));
-                        if(output)  {
-                            message.channel.send(output);
-                            check = true;
-                        }
-                        output = ($('.InfoboxAW2v2.ui-image a').attr('href'));
-                        if(output)  {
-                            message.channel.send(output);
-                            check = true;
-                        }
-                    }
-                    else{
-                        output = ($('.InfoboxBase.ui-image a').attr('href'));
-                        message.channel.send(output);
-                        check = true;
-                    }
-                    if(check == false) message.channel.send(input + " does not exist");
                 }
-                else message.channel.send(unit + " " + "not found");
+                else message.channel.send(input + " " + "not found");
             }
         });
     }
-}
-// capitalize
-function toTitleCase(str) {
-    return str.replace(/\w+('s)?/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
 }
 
 module.exports = FindImage;

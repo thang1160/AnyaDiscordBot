@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
 var request = require('request');
 var cheerio = require('cheerio');
-var name = require('../../lib.js').name;
+var name = require('../../library/lib.js').name;
 
 class FindIcon extends commando.Command {
     constructor(client) {
