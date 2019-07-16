@@ -6,7 +6,7 @@ class Maintenance extends commando.Command {
             name: 'maintenance',
             group: 'timer',
             memberName: 'maintenance',
-            description: 'how long until maintaince finish'
+            description: 'how long until maintaince start & finish'
         });
     }
 
