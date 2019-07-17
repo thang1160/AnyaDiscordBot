@@ -43,6 +43,7 @@ class Maintenance extends commando.Command {
         {
             for (let i = 0; i < 7; i++) {
                 var element = textArray[i].toLowerCase();
+                message.channel.send(element + " | " + input);
                 if(element.includes(input))
                 {
                     message.channel.send(number[i] + "\n");
