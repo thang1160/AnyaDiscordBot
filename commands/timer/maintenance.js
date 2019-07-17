@@ -11,7 +11,7 @@ class Maintenance extends commando.Command {
     }
 
     async run(message, input) {
-        var today = new Date();
+        const today = new Date();
         var curr = new Date();
         var first = curr.getDate() - curr.getDay();
         var last = first + 4;
