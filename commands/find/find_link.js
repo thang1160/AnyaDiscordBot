@@ -1,62 +1,42 @@
 const commando = require('discord.js-commando');
+var request = require('request');
+var cheerio = require('cheerio');
+var name = require('../../library/lib.js').name;
+var functions = require('../../functions.js');
 
-class Maintenance extends commando.Command {
+class FindLink extends commando.Command {
     constructor(client) {
         super(client, {
-            name: 'daily',
-            group: 'daily',
-            memberName: 'daily',
-            description: 'list of daily quest and drop'
+            name: 'link',
+            group: 'find',
+            memberName: 'link',
+            description: 'find link on wiki of an unit'
         });
     }
 
     async run(message, input) {
-        var textArray = {
-            0 : 'Demon crystal\nOrbs: Alchemist, Curse User, Puppeteer, Thief, Bowrider',
-            1 : 'Armor\nOrbs: Archer, Dark Fighter, Healer, Rearguard Tactician, Gunner',
-            2 : 'Spirit\nOrbs: Valkyrie, Pegasus Rider, Monk, Bandit, Feng Shui User',
-            3 : 'Demon crystal\nOrbs: Soldier, Rogue, Pirate, Shaman, Bishop',
-            4 : 'Affection items\nOrbs: Heavy Armor, Samurai, Magic Fencer, Vampire Hunter, Sailor',
-            5 : 'Armor\nOrbs: Witch, Warlock, Vanguard Tactician, Ninja, Angel',
-            6 : 'Spirit\nOrbs: Mage Armor, Ranger, Dancer, Dragon Rider, Priest Warrior'
-        }
-        var number = {
-            0 : 'Sunday',
-            1 : 'Monday',
-            2 : 'Tuesday',
-            3 : 'Wednesday',
-            4 : 'Thursday',
-            5 : 'Friday',
-            6 : 'Saturday'
-        }
-        var date = parseInt(input);
-        var check = false;
-        if(date != NaN)
-        {
-            if(date >= 0 && date <= 6)
-                {
-                    message.channel.send(textArray[date]);
-                    check = true;
-                }
-        }
-        else if(input.length >= 3)
-        {
-            message.channel.send(input);
-            for (let i = 0; i < textArray.length; i++) {
-                const element = textArray[i];
-                if(element.includes(input))
-                {
-                    message.channel.send(number[i] + "\n");
-                    check = true;
-                }
+        var unit = functions.toTitleCase(input);
+        var temp = unit.split(" ");
+        if(temp.length == 1);
+        else{
+            unit = "";
+            for (let i = 0; i < temp.length-1; i++) {
+                unit = unit + "_"; 
             }
-            if(check = false)
-                message.channel.send("Input wrong, please try again");
+            unit = unit + temp[length-1];
         }
-        else
-            message.channel.send("Input too short, please try again");
-        message.channel.send("Note: Sunday is 0, Monday is 1, and so on till 6\n");
+        var link = "https://aigis.fandom.com/wiki/" + unit;
+        
+        request(link, function (err, resp, html) {
+            if (!err) {
+                const $ = cheerio.load(html);
+                if ( $( '.ui-text.ui-spacing' ).length) {
+                    message.channel.send(link);
+                }
+                else message.channel.send(unit + " doesn't exist");
+            }
+        });
     }
 }
 
-module.exports = Maintenance;
+module.exports = FindLink;
