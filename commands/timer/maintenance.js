@@ -18,7 +18,7 @@ class Maintenance extends commando.Command {
 
         var lastday = new Date(curr.setDate(last));
         if(lastday <= today) lastday = new Date(curr.setDate(last + 7));
-        lastday = new Date(lastday.setHours(8));
+        lastday = new Date(lastday.setHours(1));
         lastday = new Date(lastday.setMinutes(0));
         lastday = new Date(lastday.setSeconds(0));
 
@@ -29,7 +29,7 @@ class Maintenance extends commando.Command {
         var diffMinutes = (totalDiffMinutes - diffDays*24)%60;
         message.channel.send("Maintenance start in: \nDay(s): " + diffDays + "   Hour(s): " + diffHours + "   Minute(s): " + diffMinutes);
 
-        lastday = new Date(lastday.setHours(13));
+        lastday = new Date(lastday.setHours(6));
         diffTime = Math.abs(lastday.getTime() - today.getTime());
         totalDiffMinutes = Math.ceil(diffTime / (1000 * 60));
         diffDays = parseInt(totalDiffMinutes/(60*24));
