@@ -31,6 +31,7 @@ class Maintenance extends commando.Command {
         }
         var date = parseInt(input);
         var check = false;
+            message.channel.send(input);
         if(date != NaN)
         {
             if(date >= 0 && date <= 6)
@@ -41,7 +42,6 @@ class Maintenance extends commando.Command {
         }
         else if(input.length >= 3)
         {
-            message.channel.send(input);
             for (let i = 0; i < textArray.length; i++) {
                 const element = textArray[i].toLowerCase();
                 if(element.includes(input))
