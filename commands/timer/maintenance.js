@@ -28,6 +28,7 @@ class Maintenance extends commando.Command {
         var diffDays = parseInt(totalDiffMinutes/(60*24));
         var diffHours = parseInt((totalDiffMinutes - diffDays*24*60)/60);
         var diffMinutes = (totalDiffMinutes - diffDays*24)%60;
+        message.channel.send(thurday);
         message.channel.send("Maintenance start in: \nDay(s): " + diffDays + "   Hour(s): " + diffHours + "   Minute(s): " + diffMinutes);
 
         lastday = thurday;
@@ -37,6 +38,7 @@ class Maintenance extends commando.Command {
         diffDays = parseInt(totalDiffMinutes/(60*24));
         diffHours = parseInt((totalDiffMinutes - diffDays*24*60)/60);
         diffMinutes = (totalDiffMinutes - diffDays*24)%60;
+        message.channel.send(lastday);
         message.channel.send("Maintenance finish in: \nDay(s): " + diffDays + "   Hour(s): " + diffHours + "   Minute(s): " + diffMinutes);
     }
 }
