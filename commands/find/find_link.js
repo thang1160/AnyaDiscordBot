@@ -16,7 +16,7 @@ class FindLink extends commando.Command {
 
     async run(message, input) {
         var unit = functions.toTitleCase(input);
-        temp = unit.split(" ");
+        var temp = unit.split(" ");
         if(temp.length == 1);
         else{
             unit = "";
