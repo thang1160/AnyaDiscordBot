@@ -11,7 +11,6 @@ class Maintenance extends commando.Command {
     }
 
     async run(message, input) {
-        message.channel.send("Note: Sunday is 0, Monday is 1, and so on till 6\n");
         var textArray = {
             0 : 'Demon crystal\nOrbs: Alchemist, Curse User, Puppeteer, Thief, Bowrider',
             1 : 'Armor\nOrbs: Archer, Dark Fighter, Healer, Rearguard Tactician, Gunner',
@@ -42,8 +41,9 @@ class Maintenance extends commando.Command {
         }
         else if(input.length >= 3)
         {
+            message.channel.send(input);
             for (let i = 0; i < textArray.length; i++) {
-                const element = textArray[i];
+                const element = textArray[i].toLowerCase();
                 if(element.includes(input))
                 {
                     message.channel.send(number[i] + "\n");
@@ -55,6 +55,7 @@ class Maintenance extends commando.Command {
         }
         else
             message.channel.send("Input too short, please try again");
+        message.channel.send("Note: Sunday is 0, Monday is 1, and so on till 6\n");
     }
 }
 
