@@ -29,24 +29,30 @@ class DailyQuest extends commando.Command {
             5: 'Friday',
             6: 'Saturday'
         }
+        var temp = input;
         var check = false;
-        var date = parseInt(input);
-        if (date >= 0 && date <= 6) {
-            console.log(textArray[date]);
-            check = true;
+        if (parseInt(input)) {
+            var date = parseInt(temp);
+            if (date >= 0 && date <= 6) {
+                message.channel.send(textArray[date]);
+                check = true;
+            }
         }
-        else if (input.length >= 3) {
+        else if (temp.length >= 3) {
             for (let i = 0; i < 7; i++) {
                 var element = textArray[i].toLowerCase();
-                if (element.includes(input)) {
-                    console.log(number[i] + "\n" + element);
+                if (element.includes(temp)) {
+                    message.channel.send(number[i] + "\n" + textArray[i]);
                     check = true;
                 }
             }
-            if (check == false)    console.log("Input wrong, please try again");
+            if (check === false) {
+                message.channel.send("Input wrong, please try again");
+                message.channel.send("Note: Sunday is 0, Monday is 1, and so on till 6\n");
+            }
         }
-        else    console.log("Input too short, please try again");
-        console.log("Note: Sunday is 0, Monday is 1, and so on till 6\n");
+        else
+            message.channel.send("Input too short, please try again");
     }
 }
 
