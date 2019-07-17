@@ -30,6 +30,8 @@ class Maintenance extends commando.Command {
         message.channel.send("Maintenance start in: \nDay(s): " + diffDays + "   Hour(s): " + diffHours + "   Minute(s): " + diffMinutes);
 
         lastday = new Date(lastday.setHours(6));
+        lastday = new Date(lastday.setMinutes(0));
+        lastday = new Date(lastday.setSeconds(0));
         diffTime = Math.abs(lastday.getTime() - today.getTime());
         totalDiffMinutes = Math.ceil(diffTime / (1000 * 60));
         diffDays = parseInt(totalDiffMinutes/(60*24));
