@@ -5,6 +5,7 @@ bot.registry.registerGroup('find', 'Find');
 bot.registry.registerGroup('timer', 'Timer');
 bot.registry.registerGroup('compare', 'Compare');
 bot.registry.registerGroup('random', 'Random');
+bot.registry.registerGroup('daily', 'Daily');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
 
