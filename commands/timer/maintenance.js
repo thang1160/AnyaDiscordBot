@@ -18,7 +18,7 @@ class Maintenance extends commando.Command {
 
         var lastday = new Date(curr.setDate(last));
         if(lastday <= today) lastday = new Date(curr.setDate(last + 7));
-        lastday = new Date(lastday.setHours(1));
+        lastday = new Date(lastday.setHours(2));
         lastday = new Date(lastday.setMinutes(0));
         lastday = new Date(lastday.setSeconds(0));
         const thursday = lastday;
