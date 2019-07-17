@@ -38,6 +38,8 @@ class Maintenance extends commando.Command {
         diffHours = parseInt((totalDiffMinutes - diffDays*24*60)/60);
         diffMinutes = (totalDiffMinutes - diffDays*24)%60;
         message.channel.send("Maintenance finish in: \nDay(s): " + diffDays + "   Hour(s): " + diffHours + "   Minute(s): " + diffMinutes);
+        var charisma = (diffDays*480 + diffHours*20 + diffMinutes*20/60 > 427)?427:parseInt((diffDays*480 + diffHours*20 + diffMinutes*20/60));
+        message.channel.send("Charisma will get after maintenance finish: " + charisma)
     }
 }
 
