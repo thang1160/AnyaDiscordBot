@@ -13,7 +13,8 @@ class Maintenance extends commando.Command {
     async run(message, input) {
         var textArray = [
             'https://media.discordapp.net/attachments/176380280293163008/558171167861506074/Nou.gif',
-            'https://tenor.com/view/two-spiderman-pointing-meme-gif-11796793'
+            'https://tenor.com/view/two-spiderman-pointing-meme-gif-11796793',
+            'https://tenor.com/view/nou-gif-7959059'
         ];
         var randomNumber = Math.floor(Math.random()*textArray.length);
         message.channel.send(textArray[randomNumber]);
