@@ -12,8 +12,6 @@
     "cheerio": "^1.0.0-rc.3",
     "discord.js": "^11.5.1",
     "discord.js-commando": "^0.10.0",
-    "puppeteer": "^1.18.1",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request": "^2.88.0"
   }
 }
