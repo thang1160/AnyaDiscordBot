@@ -21,7 +21,8 @@ var name = {
     'Pomf' : 'Tenma',
     'Anon' : 'Remii',
     'Will' : 'Mikoto',
-    'Electric' : 'Rion'
+    'Electric' : 'Rion',
+    'MMM' : 'Quill'
 }
 
 exports.name = name;
