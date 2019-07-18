@@ -10,12 +10,18 @@ var name = {
     'Hammerloli' : 'Teeny',
     'Swordloli' : 'Rischelte',
     'Waterloli' : 'Cenote',
+    'Darkloli' : 'Clarice',
     'Catloli' : 'Minette',
     'Danchou' : 'Dark Knight',
     'Dark' : 'D\'Arc',
     'Cucumber' : 'Kyuubi',
     'Ate' : 'Kibahime',
-    'Kure' : 'Kanon'
+    'Kure' : 'Kanon',
+    'Hk' : 'Marie',
+    'Pomf' : 'Tenma',
+    'Anon' : 'Remii',
+    'Will' : 'Mikoto',
+    'Electric' : 'Rion'
 }
 
 exports.name = name;
