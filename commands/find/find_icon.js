@@ -54,7 +54,7 @@ class FindIcon extends commando.Command {
                             check = true;
                         }
                     }
-                    if(check == false) message.channel.send(input + " does not exist");
+                    if(check == false) message.channel.send("icon " + unit + " " + "not found");
                 }
                 else message.channel.send("icon " + unit + " " + "not found");
             }
