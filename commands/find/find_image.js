@@ -37,6 +37,7 @@ class FindImage extends commando.Command {
                     if(output)  {
                         message.channel.send(output);
                     }
+                    else message.channel.send(input + " " + "not found");
                 }
                 else message.channel.send(input + " " + "not found");
             }
