@@ -8,6 +8,8 @@ var name = {
     'Chocorino' : 'Rino (Valentine\'s)',
     'Chainloli' : 'Salus',
     'Hammerloli' : 'Teeny',
+    'Swordloli' : 'Rischelte',
+    'Waterloli' : 'Cenote',
     'Catloli' : 'Minette',
     'Danchou' : 'Dark Knight',
     'Dark' : 'D\'Arc',
