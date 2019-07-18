@@ -16,23 +16,36 @@ class CompareClass extends commando.Command {
 
     async run(message, input) {
         var unit = functions.toTitleCase(input);
+        if(name[unit]) unit = name[unit];
         var link = "https://aigis.fandom.com/wiki/" + unit;
-        
+
         request(link, function (err, resp, html) {
             if (!err) {
                 const $ = cheerio.load(html);
-                if ( $( '.gcstyle.bgwhite.hsbullet tr' ).length == 5) {
-                    var name1 = $('.gcstyle.bgwhite.hsbullet tr:nth-child(4) td:first-child').text();
-                    var des1 = $('.gcstyle.bgwhite.hsbullet tr:nth-child(4) td:nth-child(2)').text();
-    
-                    var name2 = $('.gcstyle.bgwhite.hsbullet tr:nth-child(5) td:first-child').text();
-                    var des2 = $('.gcstyle.bgwhite.hsbullet tr:nth-child(5) td:nth-child(2)').text();
-    
-                    var text = name1 + "\n" + des1 + "\n" + name2 + "\n" + des2;
+                var text;
+                if ($('.gcstyle.bgwhite.hsbullet tr').length >= 5) {
+                    const length = $( '.gcstyle.bgwhite.hsbullet tr' ).length;
+                    var jquery = '.gcstyle.bgwhite.hsbullet tr:nth-child('+(length-1)+') td:first-child';
+                    var name1 = $(jquery).text().trim();
+                    jquery = '.gcstyle.bgwhite.hsbullet tr:nth-child('+(length-1)+') td:nth-child(2)';
+                    var des1 = $(jquery).text().trim();
+                    jquery = '.gcstyle.bgwhite.hsbullet tr:nth-child('+(length-1)+') td:nth-child(3)';
+                    var stat1 = $(jquery).text().trim();
+
+                    jquery = '.gcstyle.bgwhite.hsbullet tr:nth-child('+length+') td:first-child';
+                    var name2 = $(jquery).text().trim();
+                    jquery = '.gcstyle.bgwhite.hsbullet tr:nth-child('+length+') td:nth-child(2)';
+                    var des2 = $(jquery).text().trim();
+                    jquery = '.gcstyle.bgwhite.hsbullet tr:nth-child('+length+') td:nth-child(3)';
+                    var stat2 = $(jquery).text().trim();
+
+                    text = name1 + "\n" + des1 + "\n" + stat1 + "\n\n" + name2 + "\n" + des2 + "\n" + stat2;
                     message.channel.send(text);
                 }
-                var text = "unit don't have AW2 or only have one path";
-                message.channel.send(text);
+                if (!text) {
+                    text = "unit don't have AW2 or only have one path";
+                    message.channel.send(text);
+                }
             }
         });
     }
