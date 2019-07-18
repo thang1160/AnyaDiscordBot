@@ -10,7 +10,7 @@ class FindImage extends commando.Command {
             name: 'image',
             group: 'find',
             memberName: 'image',
-            description: 'find an image of unit'
+            description: 'find an image of unit. Ex: !image snekloli aw2v1'
         });
     }
 
