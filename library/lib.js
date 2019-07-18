@@ -22,7 +22,7 @@ var name = {
     'Anon' : 'Remii',
     'Will' : 'Mikoto',
     'Electric' : 'Rion',
-    'MMM' : 'Quill'
+    'Mmm' : 'Quill'
 }
 
 exports.name = name;
