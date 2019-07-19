@@ -51,9 +51,10 @@ class CompareClass extends commando.Command {
                         output = $('.c5 ').first().text();
                         var lv1v2 = lv1line(output);
                         text = name1 + "\n" + des1 + "\n" + stat1 + "\nLv99   " + lv99v1 + "   " + lv1v1 + "\n\n" + name2 + "\n" + des2 + "\n" + stat2 + "\nLv99   " + lv99v2 + "   " + lv1v2;
+                        text = text + "\n\nstats different is currently on beta, check pin for more information";
+                        if(lv99v1 === undefined) text = "unit don't have AW2 or only have one path";
 
                         message.channel.send(text);
-                        message.channel.send("\n\nstats different is currently on beta, check pin for more information");
                     }
                 }
                 if (!text) {
@@ -72,6 +73,7 @@ function lv99line(output) {
     output = output.trim();
     var arr = output.split('\n');
 
+    if(arr.length == 1) return;
     if (arr[3].length > 3) {
         var range = arr[3].substring(0, 3) + "/" + arr[3].substring(3, 6) + "/" + arr[3].substring(6, 9);
         return ("HP: " + arr[0] + "   ATK: " + arr[1] + "   DEF: " + arr[2] + "   Range: " + range);
