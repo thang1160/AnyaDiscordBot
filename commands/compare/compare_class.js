@@ -24,10 +24,7 @@ class CompareClass extends commando.Command {
                 const $ = cheerio.load(html);
                 var text;
                 var black = $('.categories').text().includes("Rarity:Black");
-                var have2aw2 = $('.wikitable.hidden').text().includes("AW2v1");
-                if (!have2aw2) have2aw2 = $('.gcstyle.bgwhite').text().includes("AW2v1");
-                // console.log(have2aw2);
-                if (black && have2aw2) {
+                if (black) {
                     if ($('.gcstyle.bgwhite.hsbullet tr').length >= 5) {
                         const length = $('.gcstyle.bgwhite.hsbullet tr').length;
                         var jquery = '.gcstyle.bgwhite.hsbullet tr:nth-child(' + (length - 1) + ') td:first-child';
