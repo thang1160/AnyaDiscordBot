@@ -89,6 +89,6 @@ function lv1line(output) {
     output = output.trim();
     var arr = output.split('\n');
 
-    return ("MR: " + arr[5] + "   Block: " + arr[6] + "   Cost-min: " + arr[7] + "   Cost-max: " + arr[8]);
+    return ("MR: " + arr[5] + "   Block: " + arr[6] + "   Cost-max: " + arr[7] + "   Cost-min: " + arr[8]);
 }
 module.exports = CompareClass;
