@@ -39,14 +39,19 @@ class FindAff extends commando.Command {
                 if (!err) {
                     const $ = cheerio.load(html);
                     var jquery = "tr:contains('" + unit + "')";
-                    var output = $(jquery).html();
-                    if (output) {
+                    for (let i = 0; i < 2; i++) {
+                        var output = $(jquery).eq(i).html();
+                        if (output)
+                            var check = output.includes(unit + " Icon");
+                        if (check === true) break;
+                    }
+                    if (output && check === true) {
                         output = output.replace(/<[^>]*>/g, "\n");
                         output = output.replace(/\n+ /g, "\n");
                         message.channel.send(output.trim());
                     }
                     else
-                        message.channel.send(input + " not found");
+                        message.channel.send(unit + " not found");
                 }
             });
         }
