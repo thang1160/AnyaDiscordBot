@@ -21,35 +21,30 @@ class FindAff extends commando.Command {
         request(link, function (err, resp, html) {
             if (!err) {
                 const $ = cheerio.load(html);
-                if ($('table').length) {
-                    var length = $("table:first-child tbody tr td div").length - 2;
-                    for (let i = 0; i < length; i++) {
-                        var jquery = "table:first-child tbody tr td div:nth-child(" + (i + 1) + ") a img";
-                        var link = $(jquery).attr('data-src').toString();
-                        link = link.match(/(http(s?):)([/|.|\w|\s|-|\%])*\.(?:png)/g);
-                        jquery = "table:first-child tbody tr td div:nth-child(" + (i + 1) + ") a";
-                        var name = $(jquery).attr('href');
-                        name = name.substr(6);
-                        message.channel.send(name, {
-                            files: [{ attachment: link.toString() }]
-                        });
-                    }
-                    if($("table").eq(1).attr('class') != "listtable bgwhite") {
-                        var length = $("table:nth-child(2) tbody tr td div").length - 2;
-                        for (let i = 0; i < length; i++) {
-                            var jquery = "table:nth-child(2) tbody tr td div:nth-child(" + (i + 1) + ") a img";
-                            var link = $(jquery).attr('data-src').toString();
-                            link = link.match(/(http(s?):)([/|.|\w|\s|-|\%])*\.(?:png)/g);
-                            jquery = "table:nth-child(2) tbody tr td div:nth-child(" + (i + 1) + ") a";
-                            var name = $(jquery).attr('href');
-                            name = name.substr(6);
-                            message.channel.send(name, {
-                                files: [{ attachment: link.toString() }]
-                            });
+                if ($("table").eq(0).attr('class') === undefined) {
+                    for (let j = 0; j < 3; j++) {
+                        if ($("table").eq(j).attr('class') === undefined) {
+                            var jquery = "table:nth-child(" + (j + 1) + ") tbody tr td div";
+                            var length = $(jquery).length - 2;
+                            for (let i = 0; i < length; i++) {
+                                var jquery = "table:nth-child(" + (j + 1) + ") tbody tr td div:nth-child(" + (i + 1) + ") a img";
+                                // console.log($(jquery).attr('data-src').toString())
+                                if($(jquery).attr('data-src') == undefined); 
+                                else {
+                                var link = $(jquery).attr('data-src').toString();
+                                link = link.match(/(http(s?):)([/|.|\w|\s|-|\%])*\.(?:png)/g);
+                                jquery = "table:nth-child(" + (j + 1) + ") tbody tr td div:nth-child(" + (i + 1) + ") a";
+                                var name = $(jquery).attr('href');
+                                name = name.substr(6);
+                                message.channel.send(name, {
+                                    files: [{ attachment: link.toString() }]
+                                });
+                                }
+                            }
                         }
                     }
                 }
-                else message.channel.send(unit + " doesn't exist");
+                else message.channel.send("can't get list of " + unit);
             }
         });
     }
