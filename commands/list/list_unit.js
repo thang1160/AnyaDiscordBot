@@ -22,23 +22,24 @@ class FindAff extends commando.Command {
             if (!err) {
                 const $ = cheerio.load(html);
                 if ($("table").eq(0).attr('class') === undefined) {
-                    for (let j = 0; j < 3; j++) {
+                    for (let j = 0; j < 5; j++) {
                         if ($("table").eq(j).attr('class') === undefined) {
                             var jquery = "table:nth-child(" + (j + 1) + ") tbody tr td div";
                             var length = $(jquery).length - 2;
                             for (let i = 0; i < length; i++) {
                                 var jquery = "table:nth-child(" + (j + 1) + ") tbody tr td div:nth-child(" + (i + 1) + ") a img";
                                 // console.log($(jquery).attr('data-src').toString())
-                                if($(jquery).attr('data-src') == undefined); 
+                                if ($(jquery).attr('data-src') == undefined);
                                 else {
-                                var link = $(jquery).attr('data-src').toString();
-                                link = link.match(/(http(s?):)([/|.|\w|\s|-|\%])*\.(?:png)/g);
-                                jquery = "table:nth-child(" + (j + 1) + ") tbody tr td div:nth-child(" + (i + 1) + ") a";
-                                var name = $(jquery).attr('href');
-                                name = name.substr(6);
-                                message.channel.send(name, {
-                                    files: [{ attachment: link.toString() }]
-                                });
+                                    var link = $(jquery).attr('data-src').toString();
+                                    link = link.match(/(http(s?):)([/|.|\w|\s|-|\%])*\.(?:png)/g);
+                                    jquery = "table:nth-child(" + (j + 1) + ") tbody tr td div:nth-child(" + (i + 1) + ") a";
+                                    var name = $(jquery).attr('href');
+                                    name = name.substr(6);
+                                    if (link)
+                                        message.channel.send(name, {
+                                            files: [{ attachment: link.toString() }]
+                                        });
                                 }
                             }
                         }
