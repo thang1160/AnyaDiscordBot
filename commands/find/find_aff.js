@@ -40,14 +40,23 @@ class FindAff extends commando.Command {
                     const $ = cheerio.load(html);
                     var jquery = "tr:contains('" + unit + "')";
                     for (let i = 0; i < 2; i++) {
+                        var check = false;
                         var output = $(jquery).eq(i).html();
-                        if (output)
-                            var check = output.includes(unit + " Icon");
+                        if (output) {
+                            if(unit.includes("'")) {
+                                var arr = unit.split('\'');
+                                check  = output.includes(arr[0] + "&amp;#039;" + arr[1] + " Icon");
+                            }
+                            else check = output.includes(unit + " Icon");
+                        }
                         if (check === true) break;
                     }
                     if (output && check === true) {
                         output = output.replace(/<[^>]*>/g, "\n");
                         output = output.replace(/\n+ /g, "\n");
+                        output = output.replace(/(&apos;)/g, "\'");
+                        output = output.replace(/(&lt;Not Implemented&gt;)/g, "150% bonus not implemented");
+                        
                         message.channel.send(output.trim());
                     }
                     else
