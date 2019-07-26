@@ -21,31 +21,22 @@ class FindAff extends commando.Command {
         request(link, function (err, resp, html) {
             if (!err) {
                 const $ = cheerio.load(html);
-                if ($("table").eq(0).attr('class') === undefined) {
-                    for (let j = 0; j < 5; j++) {
-                        if ($("table").eq(j).attr('class') === undefined) {
-                            var jquery = "table:nth-child(" + (j + 1) + ") tbody tr td div";
-                            var length = $(jquery).length - 2;
-                            for (let i = 0; i < length; i++) {
-                                var jquery = "table:nth-child(" + (j + 1) + ") tbody tr td div:nth-child(" + (i + 1) + ") a img";
-                                // console.log($(jquery).attr('data-src').toString())
-                                if ($(jquery).attr('data-src') == undefined);
-                                else {
-                                    var link = $(jquery).attr('data-src').toString();
-                                    link = link.match(/(http(s?):)([/|.|\w|\s|-|\%])*\.(?:png)/g);
-                                    jquery = "table:nth-child(" + (j + 1) + ") tbody tr td div:nth-child(" + (i + 1) + ") a";
-                                    var name = $(jquery).attr('href');
-                                    name = name.substr(6);
-                                    if (link)
-                                        message.channel.send(name, {
-                                            files: [{ attachment: link.toString() }]
-                                        });
-                                }
-                            }
-                        }
+                var exist = false;
+                for (let i = 0; i < 50; i++) {
+                    var img = $("td:contains('edit stats') div:first-child a img").eq(i).attr('data-src');
+                    if(img !== undefined)
+                    {
+                        img = img.match(/(http(s?):)([/|.|\w|\s|-|\%])*\.(?:png)/g).toString();
+                        var name = $("td:contains('edit stats') div:first-child a img").eq(i).attr('alt');
+                        name = name.substr(0,name.length - 5);
+                        name = name.replace(/(&#039;)/g,'\'')
+                        message.channel.send(name.trim(), {
+                            files: [{ attachment: img.toString() }]
+                        });
+                        exist = true;
                     }
                 }
-                else message.channel.send("can't get list of " + unit);
+                if(exist == false)  message.channel.send("can't get list of " + unit + "\ntry again with `s` after name of class")
             }
         });
     }
