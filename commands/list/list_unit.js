@@ -24,19 +24,20 @@ class FindAff extends commando.Command {
                 var exist = false;
                 for (let i = 0; i < 50; i++) {
                     var img = $("td:contains('edit stats') div:first-child a img").eq(i).attr('data-src');
-                    if(img !== undefined)
-                    {
-                        img = img.match(/(http(s?):)([/|.|\w|\s|-|\%])*\.(?:png)/g).toString();
-                        var name = $("td:contains('edit stats') div:first-child a img").eq(i).attr('alt');
-                        name = name.substr(0,name.length - 5);
-                        name = name.replace(/(&#039;)/g,'\'')
-                        message.channel.send(name.trim(), {
-                            files: [{ attachment: img.toString() }]
-                        });
-                        exist = true;
+                    if (img !== undefined) {
+                        img = img.split(/(\/revision\/latest\/scale-to-width-down\/)/g)[0];
+                        if (img !== null) {
+                            var name = $("td:contains('edit stats') div:first-child a img").eq(i).attr('alt');
+                            name = name.substr(0, name.length - 5);
+                            name = name.replace(/(&#039;)/g, '\'')
+                            message.channel.send(name.trim(), {
+                                files: [{ attachment: img.toString() }]
+                            });
+                            exist = true;
+                        }
                     }
                 }
-                if(exist == false)  message.channel.send("can't get list of " + unit + "\ntry again with `s` after name of class")
+                if (exist == false) message.channel.send("can't get list of " + unit + "\ntry again with `s` after name of class")
             }
         });
     }
