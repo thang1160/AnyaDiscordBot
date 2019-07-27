@@ -8,6 +8,7 @@ bot.registry.registerGroup('random', 'Random');
 bot.registry.registerGroup('daily', 'Daily');
 bot.registry.registerGroup('fame', 'Fame');
 bot.registry.registerGroup('list', 'List');
+bot.registry.registerGroup('calculate', 'Calculate');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
 
