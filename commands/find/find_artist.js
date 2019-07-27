@@ -29,31 +29,31 @@ class FindArtist extends commando.Command {
         var artist = null;
         request(link, function (err, resp, html) {
             if (!err) {
-                const $ = cheerio.load(html);
+                var $ = cheerio.load(html);
                 if ( $( '.ui-text.ui-spacing' ).length) {
                     artist = $(".ui-data").eq(1).text();
                 }
                 
             }
         });
-		if(artist === null) message.channel.send(unit + " doesn't exist");
-		else {
-			artist = artist.split(" ")[0];
-			link = https://aigis.fandom.com/wiki/Artists;
-			request(link, function (err, resp, html) {
-            if (!err) {
-                const $ = cheerio.load(html);
-                var jquery = "";
-				for(var i = 0; i < 4; i++) {
-					jquery = "tr:contains('" + artist + "') td:nth-child(3) a";
-					if($(jquery).eq(i).text() === undefined) break;
-					else {
-						message.channel.send($(jquery).eq(i).text().trim() + "\n" + $(jquery).eq(i).attr("href").trim());
-					}
-				}
-            }
-        });
-		}
+	if(artist === null) message.channel.send(unit + " doesn't exist");
+	else {
+	    artist = artist.split(" ")[0];
+	    link = https://aigis.fandom.com/wiki/Artists;
+	    request(link, function (err, resp, html) {
+                if (!err) {
+            	    var $ = cheerio.load(html);
+                    var jquery = "";
+		    for(var i = 0; i < 4; i++) {
+			jquery = "tr:contains('" + artist + "') td:nth-child(3) a";
+			if($(jquery).eq(i).text() === undefined) break;
+			else {
+			    message.channel.send($(jquery).eq(i).text().trim() + "\n" + $(jquery).eq(i).attr("href").trim());
+			}
+		    }
+                }
+	    });
+	}
     }
 }
 
