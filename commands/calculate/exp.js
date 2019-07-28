@@ -75,8 +75,8 @@ class ExpCalculator extends commando.Command {
                         for (var k = 0; k <= Math.floor(expNeed / 40000); k++) {
                             var expLeft = expNeed - i * 8000 - j * 20000 - k * 40000;
                             if (expLeft < 0) break;
-                            if (expLeft >= 0 && expLeft < 8000) {
-                                message.channel.send("BlackArmor: " + k + "PlatArmor: " + i + "\tFarah: " + j + "\tExp need left: " + expLeft);
+                            if (expLeft >= 0 && expLeft < 8000 && j % 2 == 1 && i % 5 != 0) {
+                                message.channel.send("BlackArmor: " + k + "\tPlatArmor: " + i + "\tFarah: " + j + "\tExp need left: " + expLeft);
                             }
                         }
                     }
