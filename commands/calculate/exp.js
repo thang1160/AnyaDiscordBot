@@ -88,7 +88,7 @@ function calculateFodder(expNeed, rarity, base, message) {
         message.channel.send("1 Black Armor = 2 Farah = 4 Placere = 5 Plat Armor")
         for (var i = 0; i <= 4; i++) {
             for (let j = 0; j <= 1; j++) {
-                for (var k = 0; k <= 1); k++) {
+                for (var k = 0; k <= 1; k++) {
                     for (var l = 0; l <= Math.floor(expNeed / (40000 * base)); l++) {
                         var expLeft = expNeed - (i * 8000 + j * 10000 + k * 20000 + l * 40000) * base;
                         if (expLeft < 0) break;
