@@ -45,8 +45,8 @@ class ExpCalculator extends commando.Command {
             if (i == 3) {
                 var alegria;
                 var limitG = Math.floor(expNeed / 18000);
-                for (let i = 0; i <= Math.floor(expNeed / 8000); i++) {
-                    for (let j = 0; j <= Math.floor(expNeed / 18000); j++) {
+                for (var i = 0; i <= Math.floor(expNeed / 8000); i++) {
+                    for (var j = 0; j <= Math.floor(expNeed / 18000); j++) {
                         var expLeft = expNeed - i * 8000 - j * 18000;
                         if (expLeft < 0) break;
                         if (expLeft >= 0 && expLeft < 8000) {
@@ -58,8 +58,8 @@ class ExpCalculator extends commando.Command {
             else if (i == 4) {
                 var freude;
                 var limitP = Math.floor(expNeed / 19000);
-                for (let i = 0; i <= Math.floor(expNeed / 8000); i++) {
-                    for (let j = 0; j <= Math.floor(expNeed / 19000); j++) {
+                for (var i = 0; i <= Math.floor(expNeed / 8000); i++) {
+                    for (var j = 0; j <= Math.floor(expNeed / 19000); j++) {
                         var expLeft = expNeed - i * 8000 - j * 19000;
                         if (expLeft < 0) break;
                         if (expLeft >= 0 && expLeft < 8000) {
@@ -71,9 +71,9 @@ class ExpCalculator extends commando.Command {
             else if (i == 5) {
                 var farah;
                 var limitB = Math.floor(expNeed / 20000);
-                for (let i = 0; i <= Math.floor(expNeed / 8000); i++) {
-                    for (let j = 0; j <= Math.floor(expNeed / 20000); j++) {
-                        for (let k = 0; k <= Math.floor(expNeed / 40000); k++) {
+                for (var i = 0; i <= Math.floor(expNeed / 8000); i++) {
+                    for (var j = 0; j <= Math.floor(expNeed / 20000); j++) {
+                        for (var k = 0; k <= Math.floor(expNeed / 40000); k++) {
                             var expLeft = expNeed - i * 8000 - j * 20000 - k * 40000;
                             if (expLeft < 0) break;
                             if (expLeft >= 0 && expLeft < 8000) {
