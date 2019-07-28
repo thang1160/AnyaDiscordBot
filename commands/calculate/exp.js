@@ -22,8 +22,8 @@ class ExpCalculator extends commando.Command {
             var to = arr[1];
             var rarity = arr[2];
             var expToLvUp = arr[3];
+            var expNeed = expToLvUp;
             if (to.localeCompare(from) < 1) message.channel.send("input wrong fromLv must bigger than toLv");
-
             else {
                 var j = 0;
                 if (rarity == "bronze") j = 1;
@@ -31,7 +31,6 @@ class ExpCalculator extends commando.Command {
                 else if (rarity == "gold") j = 3;
                 else if (rarity == "plat" || rarity == "sap") j = 4;
                 else if (rarity == "black") j = 5;
-                var expNeed = expToLvUp;
                 for (let i = from; i < to - 1; i++) {
                     expNeed = +expNeed + +expTable[i][j];
                 }
