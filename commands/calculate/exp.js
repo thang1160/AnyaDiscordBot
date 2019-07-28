@@ -41,7 +41,7 @@ class ExpCalculator extends commando.Command {
             var limitPArmor = Math.floor(expNeed / 8000);
             var limitBArmor = Math.floor(expNeed / 40000);
 
-            if (i == 3) {
+            if (rarity == "gold") {
                 var alegria;
                 var limitG = Math.floor(expNeed / 18000);
                 for (var i = 0; i <= Math.floor(expNeed / 8000); i++) {
@@ -54,7 +54,7 @@ class ExpCalculator extends commando.Command {
                     }
                 }
             }
-            else if (i == 4) {
+            else if (rarity == "plat") {
                 var freude;
                 var limitP = Math.floor(expNeed / 19000);
                 for (var i = 0; i <= Math.floor(expNeed / 8000); i++) {
@@ -67,7 +67,7 @@ class ExpCalculator extends commando.Command {
                     }
                 }
             }
-            else if (i == 5) {
+            else if (rarity == "black") {
                 var farah;
                 var limitB = Math.floor(expNeed / 20000);
                 for (var i = 0; i <= Math.floor(expNeed / 8000); i++) {
