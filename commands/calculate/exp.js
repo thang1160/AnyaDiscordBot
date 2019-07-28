@@ -68,15 +68,14 @@ class ExpCalculator extends commando.Command {
                 }
             }
             else if (rarity == "black") {
+                message.channel.send("1 Black Armor = 2 Farah = 5 Plat Armor")
                 var farah;
                 var limitB = Math.floor(expNeed / 20000);
-                for (var i = 0; i <= Math.floor(expNeed / 8000); i++) {
-                    for (var j = 0; j <= Math.floor(expNeed / 20000); j++) {
+                for (var i = 0; i <= 4; i++) {
+                    for (var j = 0; j <= 1; j++) {
                         for (var k = 0; k <= Math.floor(expNeed / 40000); k++) {
                             var expLeft = expNeed - i * 8000 - j * 20000 - k * 40000;
                             if (expLeft < 0) break;
-                            if (j % 2 == 0 && j > 0) break;
-                            if (i % 5 == 0 && i > 0) break;
                             if (expLeft >= 0 && expLeft < 8000) {
                                 message.channel.send("BlackArmor: " + k + "\tPlatArmor: " + i + "\tFarah: " + j + "\tExp need left: " + expLeft);
                             }
