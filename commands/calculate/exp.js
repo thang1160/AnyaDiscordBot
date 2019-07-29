@@ -44,17 +44,17 @@ class ExpCalculator extends commando.Command {
             collector.on('collect', message => {
                 if (message.content.toLocaleLowerCase() == "y") {
                     collector.stop()
-                    calculateFodder(expNeed, rarity, 1.1, message);
+                    calculateFodder(expNeed, rarity, 1.1, message, from, expToLvUp);
                 } else if (message.content.toLocaleLowerCase() == "n") {
                     collector.stop()
-                    calculateFodder(expNeed, rarity, 1, message);
+                    calculateFodder(expNeed, rarity, 1, message, from, expToLvUp);
                 }
             })
         }
     }
 }
 
-function calculateFodder(expNeed, rarity, base, message) {
+function calculateFodder(expNeed, rarity, base, message, from, expToLvUp) {
     if (rarity == "gold") {
         for (var i = 0; i <= Math.floor(expNeed / (8000 * base)); i++) {
             for (var j = 0; j <= Math.floor(expNeed / (18000 * base)); j++) {
@@ -87,7 +87,7 @@ function calculateFodder(expNeed, rarity, base, message) {
         }
     }
     else if (rarity == "black") {
-        message.channel.send("1 Black Armor = 2 Farah = 4 Placere = 5 Plat Armor")
+        message.channel.send("Combine with following order to get minimum gold required\n5 Plat Armor = 1 Black Armor = 4 Placere = 2 Farah\nAlways check pin for more information")
         for (var i = 0; i <= 4; i++) {
             for (let j = 0; j <= 1; j++) {
                 for (var k = 0; k <= 1; k++) {
@@ -96,6 +96,8 @@ function calculateFodder(expNeed, rarity, base, message) {
                         if (expLeft < 0) break;
                         if (expLeft >= 0 && expLeft < (8000 * base)) {
                             message.channel.send("BlackArmor: " + l + "   Farah: " + k + "   Placere: " + j + "   PlatArmor: " + i + "   Exp need left: " + Math.ceil(expLeft));
+                            var goldTotal = goldRequired(i, j, k, l, from, expNeed, base, expToLvUp);
+                            message.channel.send("Gold required for these fodder (beta): " + goldTotal);
                         }
                     }
                 }
@@ -103,6 +105,91 @@ function calculateFodder(expNeed, rarity, base, message) {
         }
     }
 
+}
+
+function goldRequired(PlatArmor, Placere, Farah, BlackArmor, lvBase, expNeed, base, expToLvUp) {
+    var goldTotal = 0;
+    var expGet;
+    for (; PlatArmor > 0;) {
+        var goldBase = (lvBase - 1) * 40 + 200;
+        if (PlatArmor >= 4) {
+            goldTotal += goldBase * 4;
+            PlatArmor -= 4;
+            expGet = 8000 * base * 4;
+        } else {
+            goldTotal += goldBase * PlatArmor;
+            expGet = 8000 * base * PlatArmor;
+            PlatArmor = 0;
+        }
+        expGet -= expToLvUp;
+        lvBase++;
+
+        for (let j = lvBase - 1; ; j++) {
+            if (expGet < expTable[j][5]) {
+                expToLvUp = expTable[j][5] - expGet;
+                expGet = 0;
+                break;
+            } else {
+                expGet -= expTable[j][5];
+                lvBase++;
+            }
+        }
+    }
+    for (; BlackArmor > 0;) {
+        var goldBase = (lvBase - 1) * 40 + 200;
+        goldTotal += goldBase * 4;
+        BlackArmor--;
+        expGet = 40000 * base;
+        expGet -= expToLvUp;
+        lvBase++;
+
+        for (let j = lvBase - 1; ; j++) {
+            if (expGet < expTable[j][5]) {
+                expToLvUp = expTable[j][5] - expGet;
+                expGet = 0;
+                break;
+            } else {
+                expGet -= expTable[j][5];
+                lvBase++;
+            }
+        }
+    }
+    if (Placere == 1) {
+        goldTotal += (lvBase - 1) * 40 + 200;
+        expGet = 10000 * base;
+        expGet -= expToLvUp;
+        lvBase++;
+
+        for (let j = lvBase - 1; ; j++) {
+            if (expGet < expTable[j][5]) {
+                expToLvUp = expTable[j][5] - expGet;
+                expGet = 0;
+                break;
+            } else {
+                expGet -= expTable[j][5];
+                lvBase++;
+            }
+        }
+    }
+    if (Farah == 1) {
+        goldTotal += (lvBase - 1) * 40 + 200;
+        expGet = 20000 * base;
+        expGet -= expToLvUp;
+        lvBase++;
+
+        for (let j = lvBase - 1; ; j++) {
+            if (expGet < expTable[j][5]) {
+                expToLvUp = expTable[j][5] - expGet;
+                expGet = 0;
+                break;
+            } else {
+                expGet -= expTable[j][5];
+                lvBase++;
+            }
+        }
+    }
+    return goldTotal;
+    // console.log(lvBase + "/" + expToLvUp + "/" + goldTotal);
 }
 
 module.exports = ExpCalculator;
