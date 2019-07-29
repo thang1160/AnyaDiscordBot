@@ -112,15 +112,9 @@ function goldRequired(PlatArmor, Placere, Farah, BlackArmor, lvBase, expNeed, ba
     var expGet;
     for (; PlatArmor > 0;) {
         var goldBase = (lvBase - 1) * 40 + 200;
-        if (PlatArmor >= 4) {
-            goldTotal += goldBase * 4;
-            PlatArmor -= 4;
-            expGet = 8000 * base * 4;
-        } else {
-            goldTotal += goldBase * PlatArmor;
-            expGet = 8000 * base * PlatArmor;
-            PlatArmor = 0;
-        }
+        goldTotal += goldBase * 4;
+        expGet = 8000 * base;
+        PlatArmor--;
         expGet -= expToLvUp;
         lvBase++;
 
