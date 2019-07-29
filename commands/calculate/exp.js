@@ -42,9 +42,11 @@ class ExpCalculator extends commando.Command {
             const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
             message.channel.send("Do you have Sariette? (y/n)")
             collector.on('collect', message => {
-                if (message.content == "y") {
+                if (message.content.toLocaleLowerCase() == "y") {
+                    collector.stop()
                     calculateFodder(expNeed, rarity, 1.1, message);
-                } else if (message.content == "n") {
+                } else if (message.content.toLocaleLowerCase() == "n") {
+                    collector.stop()
                     calculateFodder(expNeed, rarity, 1, message);
                 }
             })
