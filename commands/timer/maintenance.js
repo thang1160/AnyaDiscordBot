@@ -6,40 +6,46 @@ class Maintenance extends commando.Command {
             name: 'maintenance',
             group: 'timer',
             memberName: 'maintenance',
-            description: 'how long until maintaince start & finish'
+            description: 'how long until maintaince start & end'
         });
     }
 
     async run(message, input) {
-        const today = new Date();
-        var curr = new Date();
-        var first = curr.getDate() - curr.getDay();
-        var last = first + 4;
+        var japanTime = new Date().toLocaleString("en-US", { timeZone: "Japan" });
+        japanTime = new Date(japanTime);
+        message.channel.send('JAP time: ' + japanTime.toLocaleString());
 
-        var lastday = new Date(curr.setDate(last));
-        if(lastday <= today) lastday = new Date(curr.setDate(last + 7));
-        lastday = new Date(lastday.setHours(2));
-        lastday = new Date(lastday.setMinutes(0));
-        lastday = new Date(lastday.setSeconds(0));
-        const thursday = lastday;
-
-        var diffTime = Math.abs(thursday.getTime() - today.getTime());
-        var totalDiffMinutes = Math.ceil(diffTime / (1000 * 60));
-        var diffDays = parseInt(totalDiffMinutes/(60*24));
-        var diffHours = parseInt((totalDiffMinutes - diffDays*24*60)/60);
-        var diffMinutes = (totalDiffMinutes - diffDays*24)%60;
-        message.channel.send("Maintenance start in: \nDay(s): " + diffDays + "   Hour(s): " + diffHours + "   Minute(s): " + diffMinutes);
-
-        lastday = thursday;
-        lastday.setHours(thursday.getHours() + 5);
-        diffTime = Math.abs(lastday.getTime() - today.getTime());
-        totalDiffMinutes = Math.ceil(diffTime / (1000 * 60));
-        diffDays = parseInt(totalDiffMinutes/(60*24));
-        diffHours = parseInt((totalDiffMinutes - diffDays*24*60)/60);
-        diffMinutes = (totalDiffMinutes - diffDays*24)%60;
-        message.channel.send("Maintenance finish in: \nDay(s): " + diffDays + "   Hour(s): " + diffHours + "   Minute(s): " + diffMinutes);
-        var charisma = (diffDays*480 + diffHours*20 + diffMinutes*20/60 > 427)?427:parseInt((diffDays*480 + diffHours*20 + diffMinutes*20/60));
-        message.channel.send("Charisma will get after maintenance finish: " + charisma)
+        var curr = new Date;
+        var thurs = curr.getDate() - curr.getDay() + 4;
+        var thursday = new Date(curr.setDate(thurs)).toLocaleString("en-US", { timeZone: "Japan" });
+        var maintenance = new Date(thursday);
+        maintenance.setHours(11);
+        maintenance.setMinutes(0);
+        maintenance.setSeconds(0);
+        if (japanTime > maintenance === false)
+            message.channel.send('Maintenance start: ' + maintenance.toLocaleString());
+        else {
+            var curr = new Date;
+            var thurs = curr.getDate() - curr.getDay() + 4 + 7;
+            var thursday = new Date(curr.setDate(thurs)).toLocaleString("en-US", { timeZone: "Japan" });
+            var maintenance = new Date(thursday);
+            maintenance.setHours(11);
+            maintenance.setMinutes(0);
+            maintenance.setSeconds(0);
+            message.channel.send('Maintenance start: ' + maintenance.toLocaleString());
+        }
+        var milidif = maintenance-japanTime;
+        var daydif = Math.floor(milidif/1000/3600/24);
+        var hourdif = Math.floor((milidif - daydif*24*3600*1000)/1000/3600);
+        var minutedif = Math.floor((milidif - daydif*24*3600*1000 - hourdif*3600*1000)/1000/60);
+        message.channel.send('Maintenance will start in ' + daydif + ' day(s)      ' + hourdif + ' hour(s)      ' + minutedif + ' minute(s)');
+        maintenance.setHours(15);
+        message.channel.send('Maintenance end: ' + maintenance.toLocaleString());
+        var milidif = maintenance-japanTime;
+        var daydif = Math.floor(milidif/1000/3600/24);
+        var hourdif = Math.floor((milidif - daydif*24*3600*1000)/1000/3600);
+        var minutedif = Math.floor((milidif - daydif*24*3600*1000 - hourdif*3600*1000)/1000/60);
+        message.channel.send('Maintenance will end in ' + daydif + ' day(s)      ' + hourdif + ' hour(s)      ' + minutedif + ' minute(s)');
     }
 }
 
