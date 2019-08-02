@@ -28,7 +28,7 @@ class ExpCalculator extends commando.Command {
             message.channel.send("Input wrong, please re-enter command like this:\n!exp `levelfrom` `rarity` `expToLvUp`");
         else if (!['iron', 'bronze', 'silver', 'gold', 'sapphire', 'plat', 'black'].includes(arr[1]))
             message.channel.send("Rarity" + arr[1] + "isn't exist");
-        else if (expToLvUp > expTable[from - 1][j] || to.localeCompare(from) < 1) {
+        else if (expToLvUp > expTable[from - 1][j]) {
             message.channel.send("Input wrong, please re-enter command like this:\n!exp `levelfrom` `rarity` `expToLvUp`");
         }
         else {
