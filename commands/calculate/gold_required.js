@@ -15,9 +15,8 @@ class ExpCalculator extends commando.Command {
     async run(message, input) {
         var arr = input.split(" ");
         var from = arr[0];
-        var to = arr[1];
-        var rarity = arr[2];
-        var expToLvUp = arr[3];
+        var rarity = arr[1];
+        var expToLvUp = arr[2];
         var j = 0;
         if (rarity == "bronze") j = 1;
         else if (rarity == "silver") j = 2;
@@ -25,12 +24,12 @@ class ExpCalculator extends commando.Command {
         else if (rarity == "plat" || rarity == "sap") j = 4;
         else if (rarity == "black") j = 5;
 
-        if (arr.length != 4 || isNaN(arr[0]) || isNaN(arr[1]) || isNaN(arr[3]) || arr[0] > 98)
-            message.channel.send("Input wrong, please re-enter command like this:\n!exp `levelfrom` `levelto` `rarity` `expToLvUp`");
-        else if (!['iron', 'bronze', 'silver', 'gold', 'sapphire', 'plat', 'black'].includes(arr[2]))
-            message.channel.send("Rarity" + arr[2] + "isn't exist");
+        if (arr.length != 3 || isNaN(arr[0]) || isNaN(arr[2]) || arr[0] > 98)
+            message.channel.send("Input wrong, please re-enter command like this:\n!exp `levelfrom` `rarity` `expToLvUp`");
+        else if (!['iron', 'bronze', 'silver', 'gold', 'sapphire', 'plat', 'black'].includes(arr[1]))
+            message.channel.send("Rarity" + arr[1] + "isn't exist");
         else if (expToLvUp > expTable[from - 1][j] || to.localeCompare(from) < 1) {
-            message.channel.send("Input wrong, please re-enter command like this:\n!exp `levelfrom` `levelto` `rarity` `expToLvUp`");
+            message.channel.send("Input wrong, please re-enter command like this:\n!exp `levelfrom` `rarity` `expToLvUp`");
         }
         else {
             const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 20000 });
@@ -161,7 +160,7 @@ function goldRequiredBlack(PlatArmor, Placere, Farah, BlackArmor, lvBase, base, 
             if(lvBase == 98) return goldTotal;
         }
     }
-    message.channel.send("Lv: " + lvBase + "      Exp needed to level up" + expToLvUp)
+    message.channel.send("Lv: " + lvBase + "      Exp needed to level up: " + expToLvUp)
     return goldTotal;
 }
 
@@ -249,7 +248,7 @@ function goldRequiredPlat(PlatArmor, Placere, Freude, BlackArmor, lvBase, base, 
         }
         console.log(lvBase + " " + expToLvUp);
     }
-    message.channel.send("Lv: " + lvBase + "      Exp needed to level up" + expToLvUp)
+    message.channel.send("Lv: " + lvBase + "      Exp needed to level up: " + expToLvUp)
     return goldTotal;
 }
 
