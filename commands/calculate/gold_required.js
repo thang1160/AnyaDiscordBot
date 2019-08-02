@@ -52,7 +52,7 @@ class ExpCalculator extends commando.Command {
                     if(message.content.split(" ")[4] == 0) var base = 1;
                     else var base = 1.1;
                     // message.channel.send("plat " + PlatArmor + " Placere " + Placere + " Freude " + Freude + " Black " + BlackArmor + " Base " + base)
-                    message.channel.send("Minimum gold require is: " + goldRequiredPlat(PlatArmor,Placere,Freude,BlackArmor,from,base,expToLvUp));
+                    message.channel.send("Minimum gold require is: " + goldRequiredPlat(PlatArmor,Placere,Freude,BlackArmor,from,base,expToLvUp, message));
                     collector.stop();
                 })
             }
@@ -70,7 +70,7 @@ class ExpCalculator extends commando.Command {
                     if(message.content.split(" ")[4] == 0) var base = 1;
                     else var base = 1.1;
                     // message.channel.send("Minimum gold require is :")
-                    message.channel.send("Minimum gold require is: " + goldRequiredBlack(PlatArmor,Placere,Farah,BlackArmor,from,base,expToLvUp));
+                    message.channel.send("Minimum gold require is: " + goldRequiredBlack(PlatArmor,Placere,Farah,BlackArmor,from,base,expToLvUp, message));
                     collector.stop();
                 })
             }
@@ -79,7 +79,7 @@ class ExpCalculator extends commando.Command {
 }
 
 //black
-function goldRequiredBlack(PlatArmor, Placere, Farah, BlackArmor, lvBase, base, expToLvUp) {
+function goldRequiredBlack(PlatArmor, Placere, Farah, BlackArmor, lvBase, base, expToLvUp, message) {
     var goldTotal = 0;
     var expGet = 0;
     for (; PlatArmor > 0;) {
@@ -161,11 +161,12 @@ function goldRequiredBlack(PlatArmor, Placere, Farah, BlackArmor, lvBase, base, 
             if(lvBase == 98) return goldTotal;
         }
     }
+    message.channel.send("Lv: " + lvBase + "      Exp needed to level up" + expToLvUp)
     return goldTotal;
 }
 
 //plat
-function goldRequiredPlat(PlatArmor, Placere, Freude, BlackArmor, lvBase, base, expToLvUp) {
+function goldRequiredPlat(PlatArmor, Placere, Freude, BlackArmor, lvBase, base, expToLvUp, message) {
     var goldTotal = 0;
     var expGet;
     for (; PlatArmor > 0;) {
@@ -248,6 +249,7 @@ function goldRequiredPlat(PlatArmor, Placere, Freude, BlackArmor, lvBase, base, 
         }
         console.log(lvBase + " " + expToLvUp);
     }
+    message.channel.send("Lv: " + lvBase + "      Exp needed to level up" + expToLvUp)
     return goldTotal;
 }
 
