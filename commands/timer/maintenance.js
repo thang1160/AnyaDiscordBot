@@ -12,8 +12,9 @@ class Maintenance extends commando.Command {
 
     async run(message, input) {
         var japanTime = new Date().toLocaleString("en-US", { timeZone: "Japan" });
-        japanTime = new Date(japanTime);
-        message.channel.send('JAP time: ' + japanTime.toLocaleString());
+        message.channel.send(japanTime)
+        // japanTime = new Date(japanTime);
+        // message.channel.send('JAP time: ' + japanTime.toLocaleString());
 
         // var curr = new Date;
         // var thurs = curr.getDate() - curr.getDay() + 4;
