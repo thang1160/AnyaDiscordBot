@@ -34,18 +34,18 @@ class Maintenance extends commando.Command {
             maintenance.setSeconds(0);
             message.channel.send('Maintenance start: ' + maintenance.toLocaleString());
         }
-        var milidif = maintenance-japanTime;
-        var daydif = Math.floor(milidif/1000/3600/24);
-        var hourdif = Math.floor((milidif - daydif*24*3600*1000)/1000/3600);
-        var minutedif = Math.floor((milidif - daydif*24*3600*1000 - hourdif*3600*1000)/1000/60);
-        message.channel.send('Maintenance will start in ' + daydif + ' day(s)      ' + hourdif + ' hour(s)      ' + minutedif + ' minute(s)');
-        maintenance.setHours(15);
-        message.channel.send('Maintenance end: ' + maintenance.toLocaleString());
-        var milidif = maintenance-japanTime;
-        var daydif = Math.floor(milidif/1000/3600/24);
-        var hourdif = Math.floor((milidif - daydif*24*3600*1000)/1000/3600);
-        var minutedif = Math.floor((milidif - daydif*24*3600*1000 - hourdif*3600*1000)/1000/60);
-        message.channel.send('Maintenance will end in ' + daydif + ' day(s)      ' + hourdif + ' hour(s)      ' + minutedif + ' minute(s)');
+        // var milidif = maintenance-japanTime;
+        // var daydif = Math.floor(milidif/1000/3600/24);
+        // var hourdif = Math.floor((milidif - daydif*24*3600*1000)/1000/3600);
+        // var minutedif = Math.floor((milidif - daydif*24*3600*1000 - hourdif*3600*1000)/1000/60);
+        // message.channel.send('Maintenance will start in ' + daydif + ' day(s)      ' + hourdif + ' hour(s)      ' + minutedif + ' minute(s)');
+        // maintenance.setHours(15);
+        // message.channel.send('Maintenance end: ' + maintenance.toLocaleString());
+        // var milidif = maintenance-japanTime;
+        // var daydif = Math.floor(milidif/1000/3600/24);
+        // var hourdif = Math.floor((milidif - daydif*24*3600*1000)/1000/3600);
+        // var minutedif = Math.floor((milidif - daydif*24*3600*1000 - hourdif*3600*1000)/1000/60);
+        // message.channel.send('Maintenance will end in ' + daydif + ' day(s)      ' + hourdif + ' hour(s)      ' + minutedif + ' minute(s)');
     }
 }
 
