@@ -11,7 +11,12 @@ class Maintenance extends commando.Command {
     }
 
     async run(message, input) {
-        message.channel.send("https://i.imgur.com/zsCyhXz.png");
+        var textArray = [
+            'https://i.imgur.com/zsCyhXz.png',
+            'https://cdn.discordapp.com/attachments/599639992309907465/604247517214932992/Ehh_No_Minion.gif'
+        ];
+        var randomNumber = Math.floor(Math.random()*textArray.length);
+        message.channel.send(textArray[randomNumber]);
     }
 }
 

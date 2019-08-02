@@ -14,7 +14,9 @@ class Maintenance extends commando.Command {
         var textArray = [
             'https://media.discordapp.net/attachments/176380280293163008/558171167861506074/Nou.gif',
             'https://tenor.com/view/two-spiderman-pointing-meme-gif-11796793',
-            'https://tenor.com/view/nou-gif-7959059'
+            'https://tenor.com/view/no-u-kik-group-gang-gangster-meme-gif-13291823',
+            'https://tenor.com/view/nou-gif-7959059',
+            'https://giant.gfycat.com/MetallicRewardingFieldmouse.webm'
         ];
         var randomNumber = Math.floor(Math.random()*textArray.length);
         message.channel.send(textArray[randomNumber]);
