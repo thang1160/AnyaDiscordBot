@@ -6,7 +6,7 @@ class DailyQuest extends commando.Command {
             name: 'daily',
             group: 'daily',
             memberName: 'daily',
-            description: 'list of daily quest and drop'
+            description: 'list of daily quest, drop and search for which day drop the orb'
         });
     }
 
@@ -30,12 +30,16 @@ class DailyQuest extends commando.Command {
             6: 'Saturday'
         }
         var temp = input;
-        var check = false;
-        if (parseInt(input)) {
-            var date = parseInt(temp);
-            if (date >= 0 && date <= 6) {
-                message.channel.send(textArray[date]);
-                check = true;
+        if (!input) {
+            var d = new Date();
+            var input = d.getDay()
+        }
+        if (input >= 0 && input <= 6) {
+            for (let i = 0; i < 7; i++) {
+                if (input == i) {
+                    message.channel.send("====> Today " + textArray[i]);
+                }
+                else message.channel.send(number[i] + " - " + textArray[i]);
             }
         }
         else if (temp.length >= 3) {
@@ -43,12 +47,7 @@ class DailyQuest extends commando.Command {
                 var element = textArray[i].toLowerCase();
                 if (element.includes(temp)) {
                     message.channel.send(number[i] + "\n" + textArray[i]);
-                    check = true;
                 }
-            }
-            if (check === false) {
-                message.channel.send("Input wrong, please try again");
-                message.channel.send("Note: Sunday is 0, Monday is 1, and so on till 6\n");
             }
         }
         else
