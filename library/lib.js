@@ -25,7 +25,8 @@ var name = {
     'Mmm' : 'Quill',
     'Banana' : 'Nanaly',
     'Corn' : 'Cornelia',
-    'Willsilver' : 'Niel'
+    'Willsilver' : 'Niel',
+    'Kira' : 'Sybilla'
 }
 
 exports.name = name;
