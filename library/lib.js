@@ -27,7 +27,9 @@ var name = {
     'Corn' : 'Cornelia',
     'Willsilver' : 'Niel',
     'Kira' : 'Sybilla',
-    'Lumi' : 'Sybilla'
+    'Lumi' : 'Sybilla',
+    'Catfish' : 'Ralph',
+    'Ordi' : 'Risley'
 }
 
 exports.name = name;
