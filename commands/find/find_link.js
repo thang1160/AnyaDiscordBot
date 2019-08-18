@@ -19,12 +19,13 @@ class FindLink extends commando.Command {
         var temp = unit.split(" ");
         if(temp.length == 1);
         else{
-            unit = "";
-            for (let i = 0; i < temp.length-1; i++) {
-                unit = unit + "_"; 
+            unit = temp[0];
+            var length = temp.length;
+            for (let i = 1; i < temp.length; i++) {
+                unit = unit + "_" + temp[i]; 
             }
-            unit = unit + temp[length-1];
         }
+        if(name[unit]) unit = name[unit];
         var link = "https://aigis.fandom.com/wiki/" + unit;
         
         request(link, function (err, resp, html) {
