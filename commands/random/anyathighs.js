@@ -4,6 +4,7 @@ class AnyaThighs extends commando.Command {
     constructor(client) {
         super(client, {
             name: 'anyathighs',
+            aliases: ['nuke','truenuke'],
             group: 'random',
             memberName: 'anyathighs',
             description: 'True nuke'
