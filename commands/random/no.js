@@ -13,7 +13,8 @@ class No extends commando.Command {
     async run(message, input) {
         var textArray = [
             'https://i.imgur.com/zsCyhXz.png',
-            'https://cdn.discordapp.com/attachments/599639992309907465/604247517214932992/Ehh_No_Minion.gif'
+            'https://cdn.discordapp.com/attachments/599639992309907465/604247517214932992/Ehh_No_Minion.gif',
+            'https://marcosmum.files.wordpress.com/2014/12/computer-says-no.gif'
         ];
         var randomNumber = Math.floor(Math.random()*textArray.length);
         message.channel.send(textArray[randomNumber]);
